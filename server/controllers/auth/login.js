@@ -22,7 +22,7 @@ async function login(request, response, next) {
   try {
     const {username, password} = request.body
 
-    // Get account from DB, and verify existance
+    // Get account from DB, and verify existence
     const foundAccount = await Account.findOne({username})
     if (!foundAccount) {
       return response.status(400).json({
