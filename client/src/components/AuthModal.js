@@ -10,7 +10,7 @@ import { useAuth } from "../contexts/AuthContext";
 import ImageUpload from "./ImageUpload";
 import "../styles/index.css";
 
-const textFieldSx = { mx: 2, my: 0.5 };
+const textFieldSx = { mx: 4, my: 0.5 };
 
 export default function AuthModal({
   open,
