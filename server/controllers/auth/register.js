@@ -24,11 +24,6 @@ async function register(request, response, next) {
 
   try {
     let { username, password, email, dateOfBirth, image } = request.body;
-    // let image;
-
-    console.log(request);
-    console.log(request.body);
-    console.log(request.file);
 
     request.file !== undefined
       ? (image = request.file.filename)

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
 import CssBaseline from "@mui/material/CssBaseline";
+import { BrowserRouter } from "react-router-dom";
 import "@fontsource/roboto";
 import "./styles/index.css";
 
@@ -12,10 +13,12 @@ import "./styles/index.css";
 ReactDOM.render(
   <React.StrictMode>
     {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
-    <AuthProvider>
-      <CssBaseline />
-      <App />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <CssBaseline />
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
     {/* </LocalizationProvider> */}
   </React.StrictMode>,
   document.getElementById("root")

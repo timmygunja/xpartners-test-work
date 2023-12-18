@@ -1,0 +1,21 @@
+.user-list {
+  width: 100%;
+  margin: 1rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1.75rem;
+}
+
+@media screen and (max-width: 800px) {
+  .user-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1.5rem;
+  }
+}
+
+/* @media screen and (max-width: 400px) {
+    .user-list {
+      grid-template-columns: 1fr;
+    }
+  } */

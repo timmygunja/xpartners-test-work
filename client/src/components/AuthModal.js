@@ -33,8 +33,6 @@ export default function AuthModal({
     setLoading(true);
     setError("");
 
-    console.log(formData);
-
     try {
       isRegisterMode ? await register(formData) : await login(formData);
       close();
