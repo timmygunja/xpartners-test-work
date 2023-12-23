@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   AppBar,
   IconButton,
@@ -11,8 +11,9 @@ import {
 import OnlineIndicator from "./OnlineIndicator";
 import AuthModal from "./AuthModal";
 import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header(props) {
   const { isLoggedIn, account, logout } = useAuth();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -42,47 +43,74 @@ export default function Header() {
     closePopover();
   };
 
+  useEffect(() => {
+    props.clickLogin !== 0 && clickLogin();
+  }, [props.clickLogin]);
+
+  useEffect(() => {
+    props.clickRegister !== 0 && clickRegister();
+  }, [props.clickRegister]);
+
   return (
     <AppBar className="header" position="static">
       <a href="/">
-        <h1>Web App</h1>
+        <h1>XPartners</h1>
       </a>
 
-      <IconButton onClick={openPopover}>
-        <OnlineIndicator online={isLoggedIn}>
-          <Avatar src={account?.username || ""} alt={account?.username || ""} />
-        </OnlineIndicator>
-      </IconButton>
+      <div className="header-mainbar">
+        <Link to={"/"} className="header-link centered">
+          <p>Home</p>
+        </Link>
+        <Link to={"/people"} className="header-link centered">
+          <p>People</p>
+        </Link>
+        <Link to={"/account"} className="header-link centered">
+          <p>Account</p>
+        </Link>
+      </div>
 
-      <Popover
-        anchorEl={anchorEl}
-        open={popover}
-        onClose={closePopover}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <List style={{ minWidth: "100px" }}>
-          <ListSubheader style={{ textAlign: "center" }}>
-            Hello, {isLoggedIn ? account.username : "Guest"}
-          </ListSubheader>
+      <div className="header-popover">
+        <IconButton onClick={openPopover}>
+          <OnlineIndicator online={isLoggedIn}>
+            <Avatar
+              src={account?.username || ""}
+              alt={account?.username || ""}
+            />
+          </OnlineIndicator>
+        </IconButton>
 
-          {isLoggedIn ? (
-            <ListItemButton onClick={logout}>Logout</ListItemButton>
-          ) : (
-            <Fragment>
-              <ListItemButton onClick={clickLogin}>Login</ListItemButton>
-              <ListItemButton onClick={clickRegister}>Reigster</ListItemButton>
-            </Fragment>
-          )}
-        </List>
-      </Popover>
+        <Popover
+          anchorEl={anchorEl}
+          open={popover}
+          onClose={closePopover}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <List style={{ minWidth: "120px" }}>
+            <ListSubheader style={{ textAlign: "center" }}>
+              Hello, {isLoggedIn ? account.username : "Guest"}
+            </ListSubheader>
 
-      <AuthModal
-        open={authModal}
-        close={() => setAuthModal(false)}
-        isRegisterMode={register}
-        toggleRegister={() => setRegister((prev) => !prev)}
-      />
+            {isLoggedIn ? (
+              <ListItemButton onClick={logout}>Logout</ListItemButton>
+            ) : (
+              <Fragment>
+                <ListItemButton onClick={clickLogin}>Login</ListItemButton>
+                <ListItemButton onClick={clickRegister}>
+                  Register
+                </ListItemButton>
+              </Fragment>
+            )}
+          </List>
+        </Popover>
+
+        <AuthModal
+          open={authModal}
+          close={() => setAuthModal(false)}
+          isRegisterMode={register}
+          toggleRegister={() => setRegister((prev) => !prev)}
+        />
+      </div>
     </AppBar>
   );
 }

@@ -8,6 +8,12 @@ body {
   font-size: 16px;
 }
 
+a,
+u {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.85);
+}
+
 .App {
   width: 100vw;
   min-height: 100vh;
@@ -26,6 +32,27 @@ body {
   flex-direction: row !important;
   align-items: center !important;
   justify-content: space-between !important;
+}
+
+.header-mainbar {
+  display: flex;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.header-mainbar a {
+  padding: 0 1.5rem;
+  /* font-size: var(--h11-font-size); */
+}
+
+.header-mainbar a:hover,
+.header-mainbar a:focus {
+  background-color: rgba(230, 230, 230, 0.5);
+}
+
+.header-popover {
+  width: 140px;
+  text-align: right;
 }
 
 .error {
