@@ -41,6 +41,7 @@ export default function AuthModal({
     try {
       isRegisterMode ? await register(formData) : await login(formData);
       close();
+      setFormData({});
     } catch (error) {
       setError(error);
     }
@@ -172,40 +173,30 @@ function RegisterForm({ formData, handleChange, setFormData }) {
         onChange={handleChange}
         required
       /> */}
-      {/* <fieldset>
-        <legend>Дата рождения*</legend>
+      <div className="centered">
         <input
-          id="date"
           type="date"
           label="Date of Birth"
           name="dateOfBirth"
-          value={dateOfBirth}
+          value={formData["dateOfBirth"] || ""}
           onChange={handleChange}
           required
         />
-      </fieldset> */}
-      <input
-        type="date"
-        label="Date of Birth"
-        name="dateOfBirth"
-        value={formData["dateOfBirth"] || ""}
-        onChange={handleChange}
-        required
-      />
+      </div>
       <FormControl sx={textFieldSx} required>
-        <FormLabel id="demo-row-radio-buttons-group-label">Пол</FormLabel>
+        <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
         <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label">
           <FormControlLabel
             onChange={onChooseGender}
             value="male"
             control={<Radio />}
-            label="М"
+            label="Male"
           />
           <FormControlLabel
             onChange={onChooseGender}
             value="female"
             control={<Radio />}
-            label="Ж"
+            label="Female"
           />
         </RadioGroup>
       </FormControl>

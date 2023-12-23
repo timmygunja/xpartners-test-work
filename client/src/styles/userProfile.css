@@ -42,9 +42,18 @@
 }
 
 .profile-card-submit button {
-  background-color: #512da8;
+  background: rgb(130, 255, 167);
+  background: linear-gradient(
+    45deg,
+    rgb(242, 252, 50) 0%,
+    rgb(91, 255, 140) 100%
+  );
+
+  box-shadow: 0 0 6px 1px rgba(135, 135, 135, 0.25);
+  text-shadow: rgba(0, 0, 0, 0.65) 0px 0px 20px;
+
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0.75rem 2.25rem;
   border: none;
   border-radius: 10px;
@@ -56,5 +65,4 @@
 
 .profile-card-submit button:hover {
   border: none;
-  background-color: #744ad5;
 }
