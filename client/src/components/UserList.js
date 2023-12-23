@@ -7,13 +7,18 @@ import "../styles/userList.css";
 const UserList = () => {
   // const { isLoggedIn, account, logout } = useAuth();
   const [users, setUsers] = useState([]);
+  const { account } = useAuth();
 
   useEffect(() => {
     const getUsers = async () => {
       try {
         const response = await axios.get("/people", {});
 
-        setUsers(response.data.users);
+        const filteredUsers = response.data.users.filter(
+          (user) => user.username !== account.username
+        );
+
+        setUsers(filteredUsers);
       } catch (error) {
         console.error(error);
       }
