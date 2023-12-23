@@ -16,19 +16,45 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   const register = (formData = {}) => {
-    console.log("OLD", formData);
-
     let newFormData = new FormData();
     newFormData.append("username", formData.username);
     newFormData.append("password", formData.password);
     newFormData.append("email", formData.email);
     newFormData.append("dateOfBirth", formData.dateOfBirth);
+    newFormData.append("gender", formData.gender);
     newFormData.append("image", formData.image);
-
 
     return new Promise((resolve, reject) => {
       axios
         .post("/auth/register", newFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(({ data: { data: accountData, token: accessToken } }) => {
+          setAccount(accountData);
+          setToken(accessToken);
+          setIsLoggedIn(true);
+          resolve(true);
+        })
+        .catch((error) => {
+          console.error(error);
+          reject(error?.response?.data?.message || error.message);
+        });
+    });
+  };
+
+  const edit = (formData = {}) => {
+    let newFormData = new FormData();
+    newFormData.append("username", formData.username);
+    newFormData.append("password", formData.password);
+    newFormData.append("newUsername", formData.newUsername);
+    newFormData.append("newPassword", formData.newPassword);
+    newFormData.append("newImage", formData.newImage);
+
+    return new Promise((resolve, reject) => {
+      axios
+        .patch("/auth/edit", newFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -111,6 +137,7 @@ export function AuthProvider({ children }) {
         account,
         token,
         register,
+        edit,
         login,
         logout,
       }}

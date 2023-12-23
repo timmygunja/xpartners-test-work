@@ -5,7 +5,7 @@ import "../styles/imageUpload.css";
 const ImageUpload = (props) => {
   const filePickerRef = useRef();
   const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState();
+  const [previewUrl, setPreviewUrl] = useState(props.value || "");
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -46,7 +46,6 @@ const ImageUpload = (props) => {
       <input
         id={props.id}
         name={props.name}
-        // value={props.value}
         type="file"
         style={{ display: "none" }}
         accept=".jpg, .jpeg, .png"

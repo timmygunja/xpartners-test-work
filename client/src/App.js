@@ -1,7 +1,8 @@
 import { useAuth } from "./contexts/AuthContext";
 import Header from "./components/Header";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import UserList from "./components/UserList";
+import UserProfile from "./components/UserProfile";
 
 export default function App() {
   const { isLoggedIn } = useAuth();
@@ -11,7 +12,7 @@ export default function App() {
     // If not, return element that will navigate to login page
     // return auth ? <Outlet /> : <Navigate to="/login" />;
 
-    return isLoggedIn ? <LoggedInText /> : <LoggedOutText />;
+    return isLoggedIn ? <Outlet /> : <LoggedOutText />;
   };
 
   return (
@@ -19,7 +20,9 @@ export default function App() {
       <Header />
 
       <Routes>
-        <Route exact path="/" element={<PrivateRoute />}></Route>
+        <Route exact path="/" element={<PrivateRoute />}>
+          <Route exact path="/account" element={<UserProfile />} />
+        </Route>
         <Route exact path="/people" element={<UserList />} />
       </Routes>
     </div>

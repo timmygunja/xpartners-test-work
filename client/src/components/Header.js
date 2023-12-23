@@ -44,7 +44,9 @@ export default function Header() {
 
   return (
     <AppBar className="header" position="static">
-      <h1>Web App</h1>
+      <a href="/">
+        <h1>Web App</h1>
+      </a>
 
       <IconButton onClick={openPopover}>
         <OnlineIndicator online={isLoggedIn}>

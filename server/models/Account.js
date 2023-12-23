@@ -12,9 +12,12 @@ const instance = new mongoose.Schema(
       type: String,
       required: true,
       lowercase: true,
-      unique: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    password_unsafe: {
       type: String,
       required: true,
     },
@@ -28,6 +31,11 @@ const instance = new mongoose.Schema(
     dateOfBirth: {
       type: Date,
       required: true,
+    },
+    gender: {
+      type: String,
+      required: true,
+      lowercase: true,
     },
     image: {
       type: String,

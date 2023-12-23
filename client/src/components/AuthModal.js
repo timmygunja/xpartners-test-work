@@ -5,6 +5,11 @@ import {
   TextField,
   Button,
   CircularProgress,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 import ImageUpload from "./ImageUpload";
@@ -121,6 +126,11 @@ function RegisterForm({ formData, handleChange, setFormData }) {
     setFormData((prev) => ({ ...prev, ["image"]: image }));
   };
 
+  const onChooseGender = (e) => {
+    const { value } = e.target;
+    setFormData((prev) => ({ ...prev, ["gender"]: value }));
+  };
+
   return (
     <Fragment>
       <DialogTitle>Create a new account</DialogTitle>
@@ -162,6 +172,18 @@ function RegisterForm({ formData, handleChange, setFormData }) {
         onChange={handleChange}
         required
       /> */}
+      {/* <fieldset>
+        <legend>Дата рождения*</legend>
+        <input
+          id="date"
+          type="date"
+          label="Date of Birth"
+          name="dateOfBirth"
+          value={dateOfBirth}
+          onChange={handleChange}
+          required
+        />
+      </fieldset> */}
       <input
         type="date"
         label="Date of Birth"
@@ -170,6 +192,23 @@ function RegisterForm({ formData, handleChange, setFormData }) {
         onChange={handleChange}
         required
       />
+      <FormControl sx={textFieldSx} required>
+        <FormLabel id="demo-row-radio-buttons-group-label">Пол</FormLabel>
+        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label">
+          <FormControlLabel
+            onChange={onChooseGender}
+            value="male"
+            control={<Radio />}
+            label="М"
+          />
+          <FormControlLabel
+            onChange={onChooseGender}
+            value="female"
+            control={<Radio />}
+            label="Ж"
+          />
+        </RadioGroup>
+      </FormControl>
       <ImageUpload
         id="image"
         name="image"

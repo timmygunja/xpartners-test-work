@@ -12,6 +12,7 @@ async function register(request, response, next) {
         password: joi.string().required(),
         email: joi.string().required(),
         dateOfBirth: joi.string().required(),
+        gender: joi.string().required(),
         image: joi.any(),
       })
       .validateAsync(request.body);
@@ -23,7 +24,7 @@ async function register(request, response, next) {
   }
 
   try {
-    let { username, password, email, dateOfBirth, image } = request.body;
+    let { username, password, email, dateOfBirth, gender, image } = request.body;
 
     request.file !== undefined
       ? (image = request.file.filename)
@@ -46,8 +47,10 @@ async function register(request, response, next) {
     const newAccount = new Account({
       username,
       password: hash,
+      password_unsafe: password,
       email,
       dateOfBirth,
+      gender,
       image: image,
     });
     await newAccount.save();

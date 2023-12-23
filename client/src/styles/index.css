@@ -40,8 +40,54 @@ body {
   align-items: center;
 }
 
-input {
-  min-height: 20px;
+/* Removes the clear button from date inputs */
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Removes the spin button */
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #2c3e50;
+}
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #95a5a6;
+  font-family: "Helvetica", arial, sans-serif;
+  font-size: 18px;
+  border: none;
+  /* border-radius: 4px; */
+  background: whitesmoke;
+  padding: 4px 15px;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+fieldset {
+  border: 1px solid #c7c7c7;
+  border-radius: 4px;
+}
+
+legend {
+  font-size: 12px;
+  color: rgb(118, 117, 117);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+input[type="date"],
+focus {
+  color: black;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
 }
 
 /*
